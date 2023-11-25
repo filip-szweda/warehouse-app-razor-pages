@@ -10,7 +10,7 @@ namespace warehouse_app.Data
         [Required(ErrorMessage = "Name value is required.")]
         public string Name { get; set; }
 
-        public List<Sale> Sales { get; set; }
-        public List<Delivery> Deliveries { get; set; }
+        public List<Sale>? Sales { get; set; }
+        public List<Delivery>? Deliveries { get; set; }
     }
 }

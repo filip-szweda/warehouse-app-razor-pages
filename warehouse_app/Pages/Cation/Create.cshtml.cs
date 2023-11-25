@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using warehouse_app.Data;
 
-namespace warehouse_app.Pages.Ion
+namespace warehouse_app.Pages.Cation
 {
     public class CreateModel : PageModel
     {
@@ -20,24 +20,23 @@ namespace warehouse_app.Pages.Ion
 
         public IActionResult OnGet()
         {
-        ViewData["AnionWaterId"] = new SelectList(_context.Waters, "Id", "Name");
         ViewData["CationWaterId"] = new SelectList(_context.Waters, "Id", "Name");
             return Page();
         }
 
         [BindProperty]
-        public warehouse_app.Data.Ion Ion { get; set; } = default!;
+        public warehouse_app.Data.Cation Cation { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Ions == null || Ion == null)
+          if (!ModelState.IsValid || _context.Cation == null || Cation == null)
             {
                 return Page();
             }
 
-            _context.Ions.Add(Ion);
+            _context.Cation.Add(Cation);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

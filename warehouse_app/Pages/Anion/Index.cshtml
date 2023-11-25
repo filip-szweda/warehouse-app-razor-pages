@@ -1,5 +1,5 @@
 ﻿@page
-@model warehouse_app.Pages.Ion.IndexModel
+@model warehouse_app.Pages.Anion.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,26 +14,26 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ion[0].Name)
+                @Html.DisplayNameFor(model => model.Anion[0].AnionWater)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ion[0].Symbol)
+                @Html.DisplayNameFor(model => model.Anion[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ion[0].Content)
+                @Html.DisplayNameFor(model => model.Anion[0].Symbol)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ion[0].CationWater)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ion[0].AnionWater)
+                @Html.DisplayNameFor(model => model.Anion[0].Content)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Ion) {
+@foreach (var item in Model.Anion) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnionWater.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -42,12 +42,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CationWater.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AnionWater.Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

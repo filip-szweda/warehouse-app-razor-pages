@@ -9,6 +9,6 @@ namespace warehouse_app.Data
 
         [Required(ErrorMessage = "Type value is required.")]
         public string Type { get; set; }
-        public List<Water> Waters { get; set; }
+        public List<Water>? Waters { get; set; }
     }
 }

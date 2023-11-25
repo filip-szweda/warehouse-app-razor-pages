@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using warehouse_app.Data;
 
-namespace warehouse_app.Pages.Ion
+namespace warehouse_app.Pages.Cation
 {
     public class DetailsModel : PageModel
     {
@@ -18,23 +18,23 @@ namespace warehouse_app.Pages.Ion
             _context = context;
         }
 
-      public warehouse_app.Data.Ion Ion { get; set; } = default!; 
+      public warehouse_app.Data.Cation Cation { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Ions == null)
+            if (id == null || _context.Cation == null)
             {
                 return NotFound();
             }
 
-            var ion = await _context.Ions.FirstOrDefaultAsync(m => m.Id == id);
-            if (ion == null)
+            var cation = await _context.Cation.FirstOrDefaultAsync(m => m.Id == id);
+            if (cation == null)
             {
                 return NotFound();
             }
             else 
             {
-                Ion = ion;
+                Cation = cation;
             }
             return Page();
         }

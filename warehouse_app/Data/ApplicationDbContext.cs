@@ -53,5 +53,9 @@ namespace warehouse_app.Data
         }
 
         public DbSet<warehouse_app.Data.Person> Person { get; set; } = default!;
+
+        public DbSet<warehouse_app.Data.Anion> Anion { get; set; } = default!;
+
+        public DbSet<warehouse_app.Data.Cation> Cation { get; set; } = default!;
     }
 }

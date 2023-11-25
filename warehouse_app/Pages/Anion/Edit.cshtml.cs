@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using warehouse_app.Data;
 
-namespace warehouse_app.Pages.Ion
+namespace warehouse_app.Pages.Anion
 {
     public class EditModel : PageModel
     {
@@ -20,23 +20,22 @@ namespace warehouse_app.Pages.Ion
         }
 
         [BindProperty]
-        public warehouse_app.Data.Ion Ion { get; set; } = default!;
+        public warehouse_app.Data.Anion Anion { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Ions == null)
+            if (id == null || _context.Anion == null)
             {
                 return NotFound();
             }
 
-            var ion =  await _context.Ions.FirstOrDefaultAsync(m => m.Id == id);
-            if (ion == null)
+            var anion =  await _context.Anion.FirstOrDefaultAsync(m => m.Id == id);
+            if (anion == null)
             {
                 return NotFound();
             }
-            Ion = ion;
+            Anion = anion;
            ViewData["AnionWaterId"] = new SelectList(_context.Waters, "Id", "Name");
-           ViewData["CationWaterId"] = new SelectList(_context.Waters, "Id", "Name");
             return Page();
         }
 
@@ -49,7 +48,7 @@ namespace warehouse_app.Pages.Ion
                 return Page();
             }
 
-            _context.Attach(Ion).State = EntityState.Modified;
+            _context.Attach(Anion).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +56,7 @@ namespace warehouse_app.Pages.Ion
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IonExists(Ion.Id))
+                if (!AnionExists(Anion.Id))
                 {
                     return NotFound();
                 }
@@ -70,9 +69,9 @@ namespace warehouse_app.Pages.Ion
             return RedirectToPage("./Index");
         }
 
-        private bool IonExists(int id)
+        private bool AnionExists(int id)
         {
-          return (_context.Ions?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Anion?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

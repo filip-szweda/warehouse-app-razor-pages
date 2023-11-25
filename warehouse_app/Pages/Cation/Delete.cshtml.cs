@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using warehouse_app.Data;
 
-namespace warehouse_app.Pages.Ion
+namespace warehouse_app.Pages.Cation
 {
     public class DeleteModel : PageModel
     {
@@ -19,40 +19,40 @@ namespace warehouse_app.Pages.Ion
         }
 
         [BindProperty]
-      public warehouse_app.Data.Ion Ion { get; set; } = default!;
+      public warehouse_app.Data.Cation Cation { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Ions == null)
+            if (id == null || _context.Cation == null)
             {
                 return NotFound();
             }
 
-            var ion = await _context.Ions.FirstOrDefaultAsync(m => m.Id == id);
+            var cation = await _context.Cation.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (ion == null)
+            if (cation == null)
             {
                 return NotFound();
             }
             else 
             {
-                Ion = ion;
+                Cation = cation;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Ions == null)
+            if (id == null || _context.Cation == null)
             {
                 return NotFound();
             }
-            var ion = await _context.Ions.FindAsync(id);
+            var cation = await _context.Cation.FindAsync(id);
 
-            if (ion != null)
+            if (cation != null)
             {
-                Ion = ion;
-                _context.Ions.Remove(Ion);
+                Cation = cation;
+                _context.Cation.Remove(Cation);
                 await _context.SaveChangesAsync();
             }
 

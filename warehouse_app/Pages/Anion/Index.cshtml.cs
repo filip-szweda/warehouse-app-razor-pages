@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using warehouse_app.Data;
 
-namespace warehouse_app.Pages.Ion
+namespace warehouse_app.Pages.Anion
 {
     public class IndexModel : PageModel
     {
@@ -18,15 +18,14 @@ namespace warehouse_app.Pages.Ion
             _context = context;
         }
 
-        public IList<warehouse_app.Data.Ion> Ion { get;set; } = default!;
+        public IList<warehouse_app.Data.Anion> Anion { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Ions != null)
+            if (_context.Anion != null)
             {
-                Ion = await _context.Ions
-                .Include(i => i.AnionWater)
-                .Include(i => i.CationWater).ToListAsync();
+                Anion = await _context.Anion
+                .Include(a => a.AnionWater).ToListAsync();
             }
         }
     }

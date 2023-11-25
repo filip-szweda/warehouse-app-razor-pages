@@ -24,8 +24,8 @@ namespace warehouse_app.Data
         [Range(5, 9, ErrorMessage = "pH value should be between 5 and 9.")]
         public decimal pH { get; set; } = 7.0m;
 
-        public List<Ion> Cations { get; set; }
-        public List<Ion> Anions { get; set; }
+        public List<Cation>? Cations { get; set; }
+        public List<Anion>? Anions { get; set; }
 
         [ReadOnly(true)]
         public string Mineralization
@@ -56,7 +56,7 @@ namespace warehouse_app.Data
         [Required(ErrorMessage = "Photo value is required.")]
         public string Photo { get; set; }
 
-        public List<DeliveryDetails> DeliveryDetails { get; set;}
-        public List<SaleDetails> SaleDetails { get; set; }
+        public List<DeliveryDetails>? DeliveryDetails { get; set;}
+        public List<SaleDetails>? SaleDetails { get; set; }
     }
 }

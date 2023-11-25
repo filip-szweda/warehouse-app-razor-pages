@@ -15,11 +15,5 @@ namespace warehouse_app.Data
 
         [Range(0, double.MaxValue, ErrorMessage = "Content value should be at least 0.")]
         public double Content { get; set; }
-
-        public Water CationWater { get; set; }
-        public int CationWaterId { get; set; }
-
-        public Water AnionWater { get; set; }
-        public int AnionWaterId { get; set; }
     }
 }
