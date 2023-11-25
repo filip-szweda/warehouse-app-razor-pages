@@ -293,14 +293,12 @@ namespace warehouse_app.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AnionWaterId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CationWaterId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<double>("Content")
                         .HasColumnType("REAL");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -312,11 +310,11 @@ namespace warehouse_app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnionWaterId");
-
-                    b.HasIndex("CationWaterId");
-
                     b.ToTable("Ions");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Ion");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("warehouse_app.Data.PackagingType", b =>
@@ -448,6 +446,30 @@ namespace warehouse_app.Migrations
                     b.ToTable("WaterTypes");
                 });
 
+            modelBuilder.Entity("warehouse_app.Data.Anion", b =>
+                {
+                    b.HasBaseType("warehouse_app.Data.Ion");
+
+                    b.Property<int>("AnionWaterId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasIndex("AnionWaterId");
+
+                    b.HasDiscriminator().HasValue("Anion");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Cation", b =>
+                {
+                    b.HasBaseType("warehouse_app.Data.Ion");
+
+                    b.Property<int>("CationWaterId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasIndex("CationWaterId");
+
+                    b.HasDiscriminator().HasValue("Cation");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -537,25 +559,6 @@ namespace warehouse_app.Migrations
                     b.Navigation("Water");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Ion", b =>
-                {
-                    b.HasOne("warehouse_app.Data.Water", "AnionWater")
-                        .WithMany("Anions")
-                        .HasForeignKey("AnionWaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("warehouse_app.Data.Water", "CationWater")
-                        .WithMany("Cations")
-                        .HasForeignKey("CationWaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AnionWater");
-
-                    b.Navigation("CationWater");
-                });
-
             modelBuilder.Entity("warehouse_app.Data.Sale", b =>
                 {
                     b.HasOne("warehouse_app.Data.Person", "Customer")
@@ -611,6 +614,28 @@ namespace warehouse_app.Migrations
                     b.Navigation("Producer");
 
                     b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Anion", b =>
+                {
+                    b.HasOne("warehouse_app.Data.Water", "AnionWater")
+                        .WithMany("Anions")
+                        .HasForeignKey("AnionWaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AnionWater");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Cation", b =>
+                {
+                    b.HasOne("warehouse_app.Data.Water", "CationWater")
+                        .WithMany("Cations")
+                        .HasForeignKey("CationWaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CationWater");
                 });
 
             modelBuilder.Entity("warehouse_app.Data.Company", b =>

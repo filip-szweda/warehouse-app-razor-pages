@@ -5,44 +5,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Warehouse App</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Company[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Company[0].PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Company[0].Email)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Company) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<a class="nav-link text-dark" asp-area="" asp-page="/Anion/Index">Anion</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/Cation/Index">Cation</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/Company/Index">Company</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/Delivery/Index">Delivery</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/DeliveryDetails/Index">DeliveryDetails</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/PackagingType/Index">PackagingType</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/Person/Index">Person</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/Sale/Index">Sale</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/SaleDetails/Index">SaleDetails</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/Water/Index">Water</a>
+<a class="nav-link text-dark" asp-area="" asp-page="/WaterType/Index">WaterType</a>
