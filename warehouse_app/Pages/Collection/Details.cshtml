@@ -1,0 +1,19 @@
+﻿@page
+@model warehouse_app.Pages.Collection.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Collection</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Collection?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
