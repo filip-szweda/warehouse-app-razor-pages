@@ -213,31 +213,239 @@ namespace warehouse_app.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Collection", b =>
+            modelBuilder.Entity("warehouse_app.Data.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Collections");
+                    b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Item", b =>
+            modelBuilder.Entity("warehouse_app.Data.Delivery", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CollectionId")
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SupplierId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CollectionId");
+                    b.HasIndex("EmployeeId");
 
-                    b.ToTable("Items");
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("Deliveries");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.DeliveryDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BottlesPerPallet")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DeliveryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NumberOfPallets")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("WaterId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryId");
+
+                    b.HasIndex("WaterId");
+
+                    b.ToTable("DeliveryDetails");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Ion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AnionWaterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CationWaterId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Content")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnionWaterId");
+
+                    b.HasIndex("CationWaterId");
+
+                    b.ToTable("Ions");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.PackagingType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Capacity")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PackagingTypes");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Person", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Person");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Sale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("SaleDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Sales");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.SaleDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("NumberOfBottles")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SaleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("WaterId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SaleId");
+
+                    b.HasIndex("WaterId");
+
+                    b.ToTable("SaleDetails");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Water", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PackagingId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ProducerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TypeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("pH")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PackagingId");
+
+                    b.HasIndex("ProducerId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("Waters");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.WaterType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WaterTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -291,16 +499,163 @@ namespace warehouse_app.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Item", b =>
+            modelBuilder.Entity("warehouse_app.Data.Delivery", b =>
                 {
-                    b.HasOne("warehouse_app.Data.Collection", null)
-                        .WithMany("Items")
-                        .HasForeignKey("CollectionId");
+                    b.HasOne("warehouse_app.Data.Person", "Employee")
+                        .WithMany("Deliveries")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("warehouse_app.Data.Company", "Supplier")
+                        .WithMany("Deliveries")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Collection", b =>
+            modelBuilder.Entity("warehouse_app.Data.DeliveryDetails", b =>
                 {
-                    b.Navigation("Items");
+                    b.HasOne("warehouse_app.Data.Delivery", "Delivery")
+                        .WithMany("DeliveryDetails")
+                        .HasForeignKey("DeliveryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("warehouse_app.Data.Water", "Water")
+                        .WithMany("DeliveryDetails")
+                        .HasForeignKey("WaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Delivery");
+
+                    b.Navigation("Water");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Ion", b =>
+                {
+                    b.HasOne("warehouse_app.Data.Water", "AnionWater")
+                        .WithMany("Anions")
+                        .HasForeignKey("AnionWaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("warehouse_app.Data.Water", "CationWater")
+                        .WithMany("Cations")
+                        .HasForeignKey("CationWaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AnionWater");
+
+                    b.Navigation("CationWater");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Sale", b =>
+                {
+                    b.HasOne("warehouse_app.Data.Person", "Customer")
+                        .WithMany("Sales")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.SaleDetails", b =>
+                {
+                    b.HasOne("warehouse_app.Data.Sale", "Sale")
+                        .WithMany("SaleDetails")
+                        .HasForeignKey("SaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("warehouse_app.Data.Water", "Water")
+                        .WithMany("SaleDetails")
+                        .HasForeignKey("WaterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sale");
+
+                    b.Navigation("Water");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Water", b =>
+                {
+                    b.HasOne("warehouse_app.Data.PackagingType", "Packaging")
+                        .WithMany("Waters")
+                        .HasForeignKey("PackagingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("warehouse_app.Data.Company", "Producer")
+                        .WithMany("Waters")
+                        .HasForeignKey("ProducerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("warehouse_app.Data.WaterType", "Type")
+                        .WithMany("Waters")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Packaging");
+
+                    b.Navigation("Producer");
+
+                    b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Company", b =>
+                {
+                    b.Navigation("Deliveries");
+
+                    b.Navigation("Waters");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Delivery", b =>
+                {
+                    b.Navigation("DeliveryDetails");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.PackagingType", b =>
+                {
+                    b.Navigation("Waters");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Person", b =>
+                {
+                    b.Navigation("Deliveries");
+
+                    b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Sale", b =>
+                {
+                    b.Navigation("SaleDetails");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.Water", b =>
+                {
+                    b.Navigation("Anions");
+
+                    b.Navigation("Cations");
+
+                    b.Navigation("DeliveryDetails");
+
+                    b.Navigation("SaleDetails");
+                });
+
+            modelBuilder.Entity("warehouse_app.Data.WaterType", b =>
+                {
+                    b.Navigation("Waters");
                 });
 #pragma warning restore 612, 618
         }

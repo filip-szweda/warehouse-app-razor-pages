@@ -16,9 +16,9 @@ namespace warehouse_app.Data
         public int BottlesPerPallet { get; set; }
         
         public Water Water { get; set; }
-        public int WaterId { get { return Water.Id; } }
+        public int WaterId { get; set; }
 
         public Delivery Delivery { get; set; }
-        public int DeliveryId { get { return Delivery.Id; } }
+        public int DeliveryId { get; set; }
     }
 }

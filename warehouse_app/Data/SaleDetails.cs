@@ -13,9 +13,9 @@ namespace warehouse_app.Data
         public int NumberOfBottles { get; set; }
 
         public Water Water { get; set; }
-        public int WaterId { get { return Water.Id; } }
+        public int WaterId { get; set; }
 
         public Sale Sale { get; set; }
-        public int SaleId { get { return Sale.Id; } }
+        public int SaleId { get; set; }
     }
 }

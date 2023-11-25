@@ -1,0 +1,48 @@
+﻿@page
+@model warehouse_app.Pages.SaleDetails.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleDetails[0].NumberOfBottles)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleDetails[0].Water)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleDetails[0].Sale)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.SaleDetails) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBottles)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Water.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sale.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

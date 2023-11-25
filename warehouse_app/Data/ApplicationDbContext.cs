@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using warehouse_app.Data;
 
 namespace warehouse_app.Data
 {
@@ -34,8 +35,8 @@ namespace warehouse_app.Data
             builder.Entity<Company>().HasMany(c => c.Deliveries).WithOne(i => i.Supplier).HasForeignKey(i => i.SupplierId);
             builder.Entity<Company>().HasMany(c => c.Waters).WithOne(i => i.Producer).HasForeignKey(i => i.ProducerId);
             
-            builder.Entity<Water>().HasMany(w => w.Cations).WithOne(w => w.Water).HasForeignKey(w => w.WaterId);
-            builder.Entity<Water>().HasMany(w => w.Anions).WithOne(w => w.Water).HasForeignKey(w => w.WaterId);
+            builder.Entity<Water>().HasMany(w => w.Cations).WithOne(w => w.CationWater).HasForeignKey(w => w.CationWaterId);
+            builder.Entity<Water>().HasMany(w => w.Anions).WithOne(w => w.AnionWater).HasForeignKey(w => w.AnionWaterId);
             builder.Entity<Water>().HasMany(w => w.DeliveryDetails).WithOne(d => d.Water).HasForeignKey(d => d.WaterId);
             builder.Entity<Water>().HasMany(w => w.SaleDetails).WithOne(s => s.Water).HasForeignKey(s => s.WaterId);
 
@@ -50,5 +51,7 @@ namespace warehouse_app.Data
             builder.Entity<Person>().HasMany(p => p.Sales).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId);
             builder.Entity<Person>().HasMany(p => p.Deliveries).WithOne(d => d.Employee).HasForeignKey(d => d.EmployeeId);
         }
+
+        public DbSet<warehouse_app.Data.Person> Person { get; set; } = default!;
     }
 }

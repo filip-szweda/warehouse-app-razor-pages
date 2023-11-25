@@ -9,7 +9,7 @@ namespace warehouse_app.Data
 
         [Required(ErrorMessage = "Customer value is required.")]
         public Person Customer { get; set; }
-        public int CustomerId { get { return Customer.Id; } }
+        public int CustomerId { get; set; }
 
         public DateTime SaleDate { get; set; }
 

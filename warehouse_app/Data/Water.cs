@@ -16,10 +16,10 @@ namespace warehouse_app.Data
 
         [Required(ErrorMessage = "Type value is required.")]
         public WaterType Type { get; set; }
-        public int TypeId { get { return Type.Id; } }
+        public int TypeId { get; set; }
 
         public Company Producer { get; set; }
-        public int ProducerId { get { return Producer.Id; } }
+        public int ProducerId { get; set; }
 
         [Range(5, 9, ErrorMessage = "pH value should be between 5 and 9.")]
         public decimal pH { get; set; } = 7.0m;
@@ -51,7 +51,7 @@ namespace warehouse_app.Data
         }
 
         public PackagingType Packaging { get; set; }
-        public int PackagingId { get { return Packaging.Id; } }
+        public int PackagingId { get; set; }
 
         [Required(ErrorMessage = "Photo value is required.")]
         public string Photo { get; set; }

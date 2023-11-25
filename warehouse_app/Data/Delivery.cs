@@ -9,11 +9,11 @@ namespace warehouse_app.Data
 
         [Required(ErrorMessage = "Employee value is required.")]
         public Person Employee { get; set; }
-        public int EmployeeId { get { return Employee.Id; } }
+        public int EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Supplier value is required.")]
         public Company Supplier { get; set; }
-        public int SupplierId { get { return Supplier.Id; } }
+        public int SupplierId { get; set; }
 
         public DateTime DeliveryDate { get; set; }
 
