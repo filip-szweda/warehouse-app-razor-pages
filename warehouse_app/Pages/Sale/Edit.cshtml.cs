@@ -35,7 +35,6 @@ namespace warehouse_app.Pages.Sale
                 return NotFound();
             }
             Sale = sale;
-           ViewData["CustomerId"] = new SelectList(_context.Person, "Id", "Name");
             return Page();
         }
 

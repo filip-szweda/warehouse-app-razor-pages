@@ -47,12 +47,7 @@ namespace warehouse_app.Data
             builder.Entity<Delivery>().HasMany(d => d.DeliveryDetails).WithOne(d => d.Delivery).HasForeignKey(d => d.DeliveryId);
 
             builder.Entity<Sale>().HasMany(s => s.SaleDetails).WithOne(s => s.Sale).HasForeignKey(s => s.SaleId);
-
-            builder.Entity<Person>().HasMany(p => p.Sales).WithOne(s => s.Customer).HasForeignKey(s => s.CustomerId);
-            builder.Entity<Person>().HasMany(p => p.Deliveries).WithOne(d => d.Employee).HasForeignKey(d => d.EmployeeId);
         }
-
-        public DbSet<warehouse_app.Data.Person> Person { get; set; } = default!;
 
         public DbSet<warehouse_app.Data.Anion> Anion { get; set; } = default!;
 

@@ -20,7 +20,6 @@ namespace warehouse_app.Pages.Delivery
 
         public IActionResult OnGet()
         {
-        ViewData["EmployeeId"] = new SelectList(_context.Set<warehouse_app.Data.Person>(), "Id", "Name");
         ViewData["SupplierId"] = new SelectList(_context.Companies, "Id", "Name");
             return Page();
         }

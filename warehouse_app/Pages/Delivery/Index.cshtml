@@ -29,7 +29,7 @@
 @foreach (var item in Model.Delivery) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Employee.Name)
+                @Html.DisplayFor(modelItem => item.Employee)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Supplier.Name)

@@ -24,8 +24,7 @@ namespace warehouse_app.Pages.Sale
         {
             if (_context.Sales != null)
             {
-                Sale = await _context.Sales
-                .Include(s => s.Customer).ToListAsync();
+                Sale = await _context.Sales.ToListAsync();
             }
         }
     }

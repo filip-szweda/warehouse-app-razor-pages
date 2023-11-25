@@ -8,8 +8,7 @@ namespace warehouse_app.Data
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Employee value is required.")]
-        public Person Employee { get; set; }
-        public int EmployeeId { get; set; }
+        public string Employee { get; set; }
 
         [Required(ErrorMessage = "Supplier value is required.")]
         public Company Supplier { get; set; }

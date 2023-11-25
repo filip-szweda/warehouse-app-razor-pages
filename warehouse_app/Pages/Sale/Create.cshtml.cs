@@ -20,7 +20,6 @@ namespace warehouse_app.Pages.Sale
 
         public IActionResult OnGet()
         {
-        ViewData["CustomerId"] = new SelectList(_context.Person, "Id", "Name");
             return Page();
         }
 

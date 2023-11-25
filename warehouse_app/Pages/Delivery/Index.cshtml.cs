@@ -25,7 +25,6 @@ namespace warehouse_app.Pages.Delivery
             if (_context.Deliveries != null)
             {
                 Delivery = await _context.Deliveries
-                .Include(d => d.Employee)
                 .Include(d => d.Supplier).ToListAsync();
             }
         }
