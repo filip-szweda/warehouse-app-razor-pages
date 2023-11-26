@@ -245,15 +245,14 @@ namespace warehouse_app.Migrations
                     b.Property<DateTime>("DeliveryDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Employee")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("SupplierId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("SupplierId");
 
@@ -335,36 +334,20 @@ namespace warehouse_app.Migrations
                     b.ToTable("PackagingTypes");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Person", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Person");
-                });
-
             modelBuilder.Entity("warehouse_app.Data.Sale", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Customer")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SaleDate")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Sales");
                 });
@@ -523,19 +506,11 @@ namespace warehouse_app.Migrations
 
             modelBuilder.Entity("warehouse_app.Data.Delivery", b =>
                 {
-                    b.HasOne("warehouse_app.Data.Person", "Employee")
-                        .WithMany("Deliveries")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("warehouse_app.Data.Company", "Supplier")
                         .WithMany("Deliveries")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Employee");
 
                     b.Navigation("Supplier");
                 });
@@ -557,17 +532,6 @@ namespace warehouse_app.Migrations
                     b.Navigation("Delivery");
 
                     b.Navigation("Water");
-                });
-
-            modelBuilder.Entity("warehouse_app.Data.Sale", b =>
-                {
-                    b.HasOne("warehouse_app.Data.Person", "Customer")
-                        .WithMany("Sales")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("warehouse_app.Data.SaleDetails", b =>
@@ -653,13 +617,6 @@ namespace warehouse_app.Migrations
             modelBuilder.Entity("warehouse_app.Data.PackagingType", b =>
                 {
                     b.Navigation("Waters");
-                });
-
-            modelBuilder.Entity("warehouse_app.Data.Person", b =>
-                {
-                    b.Navigation("Deliveries");
-
-                    b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("warehouse_app.Data.Sale", b =>

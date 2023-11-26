@@ -80,16 +80,17 @@ namespace warehouse_app.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Person",
+                name: "Sales",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Customer = table.Column<string>(type: "TEXT", nullable: false),
+                    SaleDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Person", x => x.Id);
+                    table.PrimaryKey("PK_Sales", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -217,7 +218,7 @@ namespace warehouse_app.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    EmployeeId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Employee = table.Column<string>(type: "TEXT", nullable: false),
                     SupplierId = table.Column<int>(type: "INTEGER", nullable: false),
                     DeliveryDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -228,32 +229,6 @@ namespace warehouse_app.Migrations
                         name: "FK_Deliveries_Companies_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Deliveries_Person_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Person",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sales",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CustomerId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SaleDate = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sales", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sales_Person_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Person",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -417,11 +392,6 @@ namespace warehouse_app.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Deliveries_EmployeeId",
-                table: "Deliveries",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Deliveries_SupplierId",
                 table: "Deliveries",
                 column: "SupplierId");
@@ -455,11 +425,6 @@ namespace warehouse_app.Migrations
                 name: "IX_SaleDetails_WaterId",
                 table: "SaleDetails",
                 column: "WaterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sales_CustomerId",
-                table: "Sales",
-                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Waters_PackagingId",
@@ -518,9 +483,6 @@ namespace warehouse_app.Migrations
 
             migrationBuilder.DropTable(
                 name: "Waters");
-
-            migrationBuilder.DropTable(
-                name: "Person");
 
             migrationBuilder.DropTable(
                 name: "Companies");

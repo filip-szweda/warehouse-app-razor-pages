@@ -12,6 +12,6 @@ namespace warehouse_app.Data
 
         [Range(0.25, double.MaxValue, ErrorMessage = "Capacity value should be at least 0.25 liters.")]
         public double Capacity { get; set; }
-        public List<Water>? Waters { get; set; }
+        public List<Water>? Waters { get; set; } = null;
     }
 }

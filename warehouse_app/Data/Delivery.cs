@@ -16,6 +16,6 @@ namespace warehouse_app.Data
 
         public DateTime DeliveryDate { get; set; }
 
-        public List<DeliveryDetails>? DeliveryDetails { get; set; }
+        public List<DeliveryDetails>? DeliveryDetails { get; set; } = null;
     }
 }

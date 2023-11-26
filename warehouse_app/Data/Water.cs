@@ -56,7 +56,7 @@ namespace warehouse_app.Data
         [Required(ErrorMessage = "Photo value is required.")]
         public string Photo { get; set; }
 
-        public List<DeliveryDetails>? DeliveryDetails { get; set;}
-        public List<SaleDetails>? SaleDetails { get; set; }
+        public List<DeliveryDetails>? DeliveryDetails { get; set; } = null;
+        public List<SaleDetails>? SaleDetails { get; set; } = null;
     }
 }

@@ -16,8 +16,8 @@ namespace warehouse_app.Data
         [EmailAddress(ErrorMessage = "Email address is invalid.")]
         public string Email { get; set; }
 
-        public List<Delivery>? Deliveries { get; set; }
+        public List<Delivery>? Deliveries { get; set; } = null;
         
-        public List<Water>? Waters { get; set; }
+        public List<Water>? Waters { get; set; } = null;
     }
 }
