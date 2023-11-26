@@ -15,10 +15,10 @@ namespace warehouse_lib.Model
         [Range(1, int.MaxValue, ErrorMessage = "Number of bottles per pallet should be greater than 0.")]
         public int BottlesPerPallet { get; set; }
 
-        public Water Water { get; set; }
-        public int WaterId { get; set; }
+        public Water? Water { get; set; }
+        public int? WaterId { get; set; }
 
-        public Delivery Delivery { get; set; }
-        public int DeliveryId { get; set; }
+        public Delivery? Delivery { get; set; }
+        public int? DeliveryId { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Anion : Ion
     {
-        public Water AnionWater { get; set; }
-        public int AnionWaterId { get; set; }
+        public Water? AnionWater { get; set; }
+        public int? AnionWaterId { get; set; }
     }
 }

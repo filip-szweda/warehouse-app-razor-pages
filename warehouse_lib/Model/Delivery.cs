@@ -12,9 +12,8 @@ namespace warehouse_lib.Model
         [Required(ErrorMessage = "Employee value is required.")]
         public string Employee { get; set; }
 
-        [Required(ErrorMessage = "Supplier value is required.")]
-        public Company Supplier { get; set; }
-        public int SupplierId { get; set; }
+        public Company? Supplier { get; set; }
+        public int? SupplierId { get; set; }
 
         public DateTime DeliveryDate { get; set; }
 
