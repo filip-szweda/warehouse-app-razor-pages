@@ -24,7 +24,7 @@ namespace warehouse_app.Pages.Sale
         }
 
         [BindProperty]
-        public warehouse_app.Data.Sale Sale { get; set; } = default!;
+        public warehouse_lib.Model.Sale Sale { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

@@ -18,7 +18,7 @@ namespace warehouse_app.Pages.SaleDetails
             _context = context;
         }
 
-      public warehouse_app.Data.SaleDetails SaleDetails { get; set; } = default!; 
+      public warehouse_lib.Model.SaleDetails SaleDetails { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

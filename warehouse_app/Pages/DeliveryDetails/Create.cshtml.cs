@@ -26,7 +26,7 @@ namespace warehouse_app.Pages.DeliveryDetails
         }
 
         [BindProperty]
-        public warehouse_app.Data.DeliveryDetails DeliveryDetails { get; set; } = default!;
+        public warehouse_lib.Model.DeliveryDetails DeliveryDetails { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

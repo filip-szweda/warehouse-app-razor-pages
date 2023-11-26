@@ -24,7 +24,7 @@ namespace warehouse_app.Pages.WaterType
         }
 
         [BindProperty]
-        public warehouse_app.Data.WaterType WaterType { get; set; } = default!;
+        public warehouse_lib.Model.WaterType WaterType { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

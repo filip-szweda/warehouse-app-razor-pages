@@ -1,4 +1,4 @@
-﻿using warehouse_app.Data;
+﻿using warehouse_lib.Model;
 
 namespace warehouse_app.Data
 {

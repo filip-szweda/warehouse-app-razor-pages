@@ -18,7 +18,7 @@ namespace warehouse_app.Pages.Anion
             _context = context;
         }
 
-        public IList<warehouse_app.Data.Anion> Anion { get;set; } = default!;
+        public IList<warehouse_lib.Model.Anion> Anion { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

@@ -19,7 +19,7 @@ namespace warehouse_app.Pages.Delivery
         }
 
         [BindProperty]
-      public warehouse_app.Data.Delivery Delivery { get; set; } = default!;
+      public warehouse_lib.Model.Delivery Delivery { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

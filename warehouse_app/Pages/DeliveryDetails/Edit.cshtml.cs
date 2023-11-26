@@ -20,7 +20,7 @@ namespace warehouse_app.Pages.DeliveryDetails
         }
 
         [BindProperty]
-        public warehouse_app.Data.DeliveryDetails DeliveryDetails { get; set; } = default!;
+        public warehouse_lib.Model.DeliveryDetails DeliveryDetails { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

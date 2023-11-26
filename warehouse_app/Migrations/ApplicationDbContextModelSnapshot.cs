@@ -213,7 +213,7 @@ namespace warehouse_app.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Company", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -236,7 +236,7 @@ namespace warehouse_app.Migrations
                     b.ToTable("Companies");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Delivery", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Delivery", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +259,7 @@ namespace warehouse_app.Migrations
                     b.ToTable("Deliveries");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.DeliveryDetails", b =>
+            modelBuilder.Entity("warehouse_lib.Model.DeliveryDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -286,7 +286,7 @@ namespace warehouse_app.Migrations
                     b.ToTable("DeliveryDetails");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Ion", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Ion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -316,7 +316,7 @@ namespace warehouse_app.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.PackagingType", b =>
+            modelBuilder.Entity("warehouse_lib.Model.PackagingType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -334,7 +334,7 @@ namespace warehouse_app.Migrations
                     b.ToTable("PackagingTypes");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Sale", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Sale", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -352,7 +352,7 @@ namespace warehouse_app.Migrations
                     b.ToTable("Sales");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.SaleDetails", b =>
+            modelBuilder.Entity("warehouse_lib.Model.SaleDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -376,7 +376,7 @@ namespace warehouse_app.Migrations
                     b.ToTable("SaleDetails");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Water", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Water", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -414,7 +414,7 @@ namespace warehouse_app.Migrations
                     b.ToTable("Waters");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.WaterType", b =>
+            modelBuilder.Entity("warehouse_lib.Model.WaterType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -429,9 +429,9 @@ namespace warehouse_app.Migrations
                     b.ToTable("WaterTypes");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Anion", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Anion", b =>
                 {
-                    b.HasBaseType("warehouse_app.Data.Ion");
+                    b.HasBaseType("warehouse_lib.Model.Ion");
 
                     b.Property<int>("AnionWaterId")
                         .HasColumnType("INTEGER");
@@ -441,9 +441,9 @@ namespace warehouse_app.Migrations
                     b.HasDiscriminator().HasValue("Anion");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Cation", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Cation", b =>
                 {
-                    b.HasBaseType("warehouse_app.Data.Ion");
+                    b.HasBaseType("warehouse_lib.Model.Ion");
 
                     b.Property<int>("CationWaterId")
                         .HasColumnType("INTEGER");
@@ -504,9 +504,9 @@ namespace warehouse_app.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Delivery", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Delivery", b =>
                 {
-                    b.HasOne("warehouse_app.Data.Company", "Supplier")
+                    b.HasOne("warehouse_lib.Model.Company", "Supplier")
                         .WithMany("Deliveries")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -515,15 +515,15 @@ namespace warehouse_app.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.DeliveryDetails", b =>
+            modelBuilder.Entity("warehouse_lib.Model.DeliveryDetails", b =>
                 {
-                    b.HasOne("warehouse_app.Data.Delivery", "Delivery")
+                    b.HasOne("warehouse_lib.Model.Delivery", "Delivery")
                         .WithMany("DeliveryDetails")
                         .HasForeignKey("DeliveryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("warehouse_app.Data.Water", "Water")
+                    b.HasOne("warehouse_lib.Model.Water", "Water")
                         .WithMany("DeliveryDetails")
                         .HasForeignKey("WaterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -534,15 +534,15 @@ namespace warehouse_app.Migrations
                     b.Navigation("Water");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.SaleDetails", b =>
+            modelBuilder.Entity("warehouse_lib.Model.SaleDetails", b =>
                 {
-                    b.HasOne("warehouse_app.Data.Sale", "Sale")
+                    b.HasOne("warehouse_lib.Model.Sale", "Sale")
                         .WithMany("SaleDetails")
                         .HasForeignKey("SaleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("warehouse_app.Data.Water", "Water")
+                    b.HasOne("warehouse_lib.Model.Water", "Water")
                         .WithMany("SaleDetails")
                         .HasForeignKey("WaterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -553,21 +553,21 @@ namespace warehouse_app.Migrations
                     b.Navigation("Water");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Water", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Water", b =>
                 {
-                    b.HasOne("warehouse_app.Data.PackagingType", "Packaging")
+                    b.HasOne("warehouse_lib.Model.PackagingType", "Packaging")
                         .WithMany("Waters")
                         .HasForeignKey("PackagingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("warehouse_app.Data.Company", "Producer")
+                    b.HasOne("warehouse_lib.Model.Company", "Producer")
                         .WithMany("Waters")
                         .HasForeignKey("ProducerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("warehouse_app.Data.WaterType", "Type")
+                    b.HasOne("warehouse_lib.Model.WaterType", "Type")
                         .WithMany("Waters")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -580,9 +580,9 @@ namespace warehouse_app.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Anion", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Anion", b =>
                 {
-                    b.HasOne("warehouse_app.Data.Water", "AnionWater")
+                    b.HasOne("warehouse_lib.Model.Water", "AnionWater")
                         .WithMany("Anions")
                         .HasForeignKey("AnionWaterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -591,9 +591,9 @@ namespace warehouse_app.Migrations
                     b.Navigation("AnionWater");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Cation", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Cation", b =>
                 {
-                    b.HasOne("warehouse_app.Data.Water", "CationWater")
+                    b.HasOne("warehouse_lib.Model.Water", "CationWater")
                         .WithMany("Cations")
                         .HasForeignKey("CationWaterId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -602,29 +602,29 @@ namespace warehouse_app.Migrations
                     b.Navigation("CationWater");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Company", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Company", b =>
                 {
                     b.Navigation("Deliveries");
 
                     b.Navigation("Waters");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Delivery", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Delivery", b =>
                 {
                     b.Navigation("DeliveryDetails");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.PackagingType", b =>
+            modelBuilder.Entity("warehouse_lib.Model.PackagingType", b =>
                 {
                     b.Navigation("Waters");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Sale", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Sale", b =>
                 {
                     b.Navigation("SaleDetails");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.Water", b =>
+            modelBuilder.Entity("warehouse_lib.Model.Water", b =>
                 {
                     b.Navigation("Anions");
 
@@ -635,7 +635,7 @@ namespace warehouse_app.Migrations
                     b.Navigation("SaleDetails");
                 });
 
-            modelBuilder.Entity("warehouse_app.Data.WaterType", b =>
+            modelBuilder.Entity("warehouse_lib.Model.WaterType", b =>
                 {
                     b.Navigation("Waters");
                 });

@@ -19,7 +19,7 @@ namespace warehouse_app.Pages.Cation
         }
 
         [BindProperty]
-      public warehouse_app.Data.Cation Cation { get; set; } = default!;
+      public warehouse_lib.Model.Cation Cation { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

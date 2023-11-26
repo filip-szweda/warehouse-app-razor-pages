@@ -18,7 +18,7 @@ namespace warehouse_app.Pages
             _context = context;
         }
 
-        public IList<warehouse_app.Data.Company> Company { get;set; } = default!;
+        public IList<warehouse_lib.Model.Company> Company { get;set; } = default!;
 
         public async Task OnGetAsync()
         {

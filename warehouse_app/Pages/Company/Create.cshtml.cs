@@ -24,7 +24,7 @@ namespace warehouse_app.Pages.Company
         }
 
         [BindProperty]
-        public warehouse_app.Data.Company Company { get; set; } = default!;
+        public warehouse_lib.Model.Company Company { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

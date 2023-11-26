@@ -19,7 +19,7 @@ namespace warehouse_app.Pages.Water
         }
 
         [BindProperty]
-      public warehouse_app.Data.Water Water { get; set; } = default!;
+      public warehouse_lib.Model.Water Water { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

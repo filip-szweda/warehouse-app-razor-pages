@@ -18,7 +18,7 @@ namespace warehouse_app.Pages.Company
             _context = context;
         }
 
-      public warehouse_app.Data.Company Company { get; set; } = default!; 
+      public warehouse_lib.Model.Company Company { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

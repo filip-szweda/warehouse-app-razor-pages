@@ -18,7 +18,7 @@ namespace warehouse_app.Pages.PackagingType
             _context = context;
         }
 
-      public warehouse_app.Data.PackagingType PackagingType { get; set; } = default!; 
+      public warehouse_lib.Model.PackagingType PackagingType { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using warehouse_app.Data;
+using warehouse_lib.Model;
 
 namespace warehouse_app.Data
 {
@@ -49,8 +49,8 @@ namespace warehouse_app.Data
             builder.Entity<Sale>().HasMany(s => s.SaleDetails).WithOne(s => s.Sale).HasForeignKey(s => s.SaleId);
         }
 
-        public DbSet<warehouse_app.Data.Anion> Anion { get; set; } = default!;
+        public DbSet<warehouse_lib.Model.Anion> Anion { get; set; } = default!;
 
-        public DbSet<warehouse_app.Data.Cation> Cation { get; set; } = default!;
+        public DbSet<warehouse_lib.Model.Cation> Cation { get; set; } = default!;
     }
 }

@@ -18,7 +18,7 @@ namespace warehouse_app.Pages.Delivery
             _context = context;
         }
 
-        public IList<warehouse_app.Data.Delivery> Delivery { get;set; } = default!;
+        public IList<warehouse_lib.Model.Delivery> Delivery { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
