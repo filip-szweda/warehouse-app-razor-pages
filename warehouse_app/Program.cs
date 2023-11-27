@@ -19,15 +19,20 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
 
+builder.Services.AddScoped<Api>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 else
 {
@@ -43,6 +48,17 @@ using (var scope = app.Services.CreateScope())
     context.Database.Migrate();
     DatabaseInitalizer.Initialize(context);
 }
+
+app.MapGet("/registered-users", async (Api api) => await api.GetAllUsersAsync());
+
+app.MapGet("/water-types", async (Api api) => await api.GetAllWatersAsync());
+
+/*app.MapPost("/buy-water", async (Api api, BuyWaterDTO buyWaterDTO) =>
+{
+    await api.BuyWaterAsync(buyWaterDTO);
+    return Results.Ok();
+});*/
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
