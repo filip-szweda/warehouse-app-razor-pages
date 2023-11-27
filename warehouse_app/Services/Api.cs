@@ -17,7 +17,7 @@ namespace warehouse_app.Services
         {
             var users = await _context.Users.ToListAsync();
 
-            return users.Select(u => u.UserName).ToList();
+            return users.Select(u => u.Email).ToList();
         }
 
         public async Task<List<string>> GetAllWatersAsync()
