@@ -150,4 +150,7 @@
   <data name="water" xml:space="preserve">
     <value>Woda</value>
   </data>
+  <data name="water_type" xml:space="preserve">
+    <value>Typ Wody</value>
+  </data>
 </root>

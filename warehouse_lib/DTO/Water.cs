@@ -23,8 +23,8 @@ namespace warehouse_lib.DTO
 
         public int PackagingTypeId { get; set; } = default!;
 
-        public List<int> DeliveryDetailsIds { get; set; } = default!;
+        public List<int> DeliveryDetailsNumberOfBottles { get; set; } = default!;
 
-        public List<int> SaleDetailsIds { get; set; } = default!;
+        public List<int> SaleDetailsNumberOfBottles { get; set; } = default!;
     }
 }

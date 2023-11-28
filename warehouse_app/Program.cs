@@ -66,7 +66,7 @@ app.MapGet("/registered-users", async (Api api) => await api.GetRegisteredUsersA
 
 app.MapGet("/water-types", async (Api api) => await api.GetWaterTypesAsync());
 
-app.MapGet("/water", async (Api api) => await api.GetWatersAsync());
+app.MapGet("/waters", async (Api api) => await api.GetWatersAsync());
 
 app.MapPost("/buy-water", async (Api api, warehouse_lib.DTO.BuyWater buyWater) =>
 {

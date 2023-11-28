@@ -209,6 +209,7 @@ namespace warehouse_app.Data
                 new DeliveryDetails { NumberOfPallets = 8,  BottlesPerPallet = 480, Water = waters[2], Delivery = deliveries[4] },
                 new DeliveryDetails { NumberOfPallets = 17, BottlesPerPallet = 620, Water = waters[1], Delivery = deliveries[1] },
                 new DeliveryDetails { NumberOfPallets = 7,  BottlesPerPallet = 470, Water = waters[3], Delivery = deliveries[2] },
+                new DeliveryDetails { NumberOfPallets = 7,  BottlesPerPallet = 470, Water = waters[7], Delivery = deliveries[2] }
             };
 
             if (!context.DeliveryDetails.Any())

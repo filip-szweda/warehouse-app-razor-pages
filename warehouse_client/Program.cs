@@ -124,7 +124,7 @@ namespace warehouse_client
         private static void ShowWarehouseWaterStock()
         {
             var httpClient = new HttpClient();
-            var urlWater = $"{baseUrl}/water";
+            var urlWater = $"{baseUrl}/waters";
 
             var waters = httpClient.GetFromJsonAsync<warehouse_lib.DTO.Water[]>(urlWater).Result;
             for (int i = 0; i < waters.Length; i++)
@@ -135,32 +135,34 @@ namespace warehouse_client
                 Console.WriteLine($"TypeId: {waters[i].TypeId}");
                 Console.WriteLine($"ProducerId: {waters[i].ProducerId}");
                 Console.WriteLine($"pH: {waters[i].pH}");
+                
                 Console.WriteLine($"Cations Ids: ");
                 foreach (var cationId in waters[i].CationsIds)
                 {
                     Console.WriteLine($"\t{cationId}");
                 }
+
                 Console.WriteLine($"Anions Ids: ");
                 foreach (var anionId in waters[i].AnionsIds)
                 {
                     Console.WriteLine($"\t{anionId}");
                 }
 
-                /*var numberOfBottles = 0;
-                foreach (var delivery in waters[i].DeliveryDetailsIds)
+                var deliveredWaterBottles = 0;
+                foreach (var deliveryDetailsNumberOfBottles in waters[i].DeliveryDetailsNumberOfBottles)
                 {
-                    numberOfBottles += delivery.NumberOfBottlesPerPallet * delivery.NumberOfPallets;
+                    deliveredWaterBottles += deliveryDetailsNumberOfBottles;
                 }
-                Console.WriteLine($"Number of delivered bottles: {numberOfBottles}");
+                Console.WriteLine($"Delivered water bottles: {deliveredWaterBottles}");
 
-                var numberOfSoldBottles = 0;
-                foreach (var sale in waters[i].SaleDetails)
+                var soldWaterBottles = 0;
+                foreach (var saleDetailsNumberOfBottles in waters[i].SaleDetailsNumberOfBottles)
                 {
-                    numberOfSoldBottles += sale.Quantity;
+                    soldWaterBottles += saleDetailsNumberOfBottles;
                 }
-                Console.WriteLine($"Number of sold bottles: {numberOfSoldBottles}");
-                Console.WriteLine($"Number of bottles in stock: {numberOfBottles - numberOfSoldBottles}");
-                Console.WriteLine("====================================================");*/
+
+                Console.WriteLine($"Sold water bottles: {soldWaterBottles}");
+                Console.WriteLine($"Water bottles in stock: {deliveredWaterBottles - soldWaterBottles}");
             }
         }
     }

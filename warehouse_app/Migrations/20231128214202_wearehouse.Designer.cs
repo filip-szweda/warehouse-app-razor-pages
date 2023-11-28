@@ -11,8 +11,8 @@ using warehouse_app.Data;
 namespace warehouse_app.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231126125427_warehouse")]
-    partial class warehouse
+    [Migration("20231128214202_wearehouse")]
+    partial class wearehouse
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -252,7 +252,7 @@ namespace warehouse_app.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("SupplierId")
+                    b.Property<int?>("SupplierId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -271,13 +271,13 @@ namespace warehouse_app.Migrations
                     b.Property<int>("BottlesPerPallet")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("DeliveryId")
+                    b.Property<int?>("DeliveryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("NumberOfPallets")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("WaterId")
+                    b.Property<int?>("WaterId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -364,10 +364,10 @@ namespace warehouse_app.Migrations
                     b.Property<int>("NumberOfBottles")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SaleId")
+                    b.Property<int?>("SaleId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("WaterId")
+                    b.Property<int?>("WaterId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -390,17 +390,17 @@ namespace warehouse_app.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("PackagingId")
+                    b.Property<int?>("PackagingId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Photo")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ProducerId")
+                    b.Property<int?>("ProducerId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TypeId")
+                    b.Property<int?>("TypeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("pH")
@@ -436,7 +436,7 @@ namespace warehouse_app.Migrations
                 {
                     b.HasBaseType("warehouse_lib.Model.Ion");
 
-                    b.Property<int>("AnionWaterId")
+                    b.Property<int?>("AnionWaterId")
                         .HasColumnType("INTEGER");
 
                     b.HasIndex("AnionWaterId");
@@ -448,7 +448,7 @@ namespace warehouse_app.Migrations
                 {
                     b.HasBaseType("warehouse_lib.Model.Ion");
 
-                    b.Property<int>("CationWaterId")
+                    b.Property<int?>("CationWaterId")
                         .HasColumnType("INTEGER");
 
                     b.HasIndex("CationWaterId");
@@ -512,8 +512,7 @@ namespace warehouse_app.Migrations
                     b.HasOne("warehouse_lib.Model.Company", "Supplier")
                         .WithMany("Deliveries")
                         .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Supplier");
                 });
@@ -523,14 +522,12 @@ namespace warehouse_app.Migrations
                     b.HasOne("warehouse_lib.Model.Delivery", "Delivery")
                         .WithMany("DeliveryDetails")
                         .HasForeignKey("DeliveryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("warehouse_lib.Model.Water", "Water")
                         .WithMany("DeliveryDetails")
                         .HasForeignKey("WaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Delivery");
 
@@ -542,14 +539,12 @@ namespace warehouse_app.Migrations
                     b.HasOne("warehouse_lib.Model.Sale", "Sale")
                         .WithMany("SaleDetails")
                         .HasForeignKey("SaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("warehouse_lib.Model.Water", "Water")
                         .WithMany("SaleDetails")
                         .HasForeignKey("WaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Sale");
 
@@ -561,20 +556,17 @@ namespace warehouse_app.Migrations
                     b.HasOne("warehouse_lib.Model.PackagingType", "Packaging")
                         .WithMany("Waters")
                         .HasForeignKey("PackagingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("warehouse_lib.Model.Company", "Producer")
                         .WithMany("Waters")
                         .HasForeignKey("ProducerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("warehouse_lib.Model.WaterType", "Type")
                         .WithMany("Waters")
                         .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Packaging");
 
@@ -588,8 +580,7 @@ namespace warehouse_app.Migrations
                     b.HasOne("warehouse_lib.Model.Water", "AnionWater")
                         .WithMany("Anions")
                         .HasForeignKey("AnionWaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("AnionWater");
                 });
@@ -599,8 +590,7 @@ namespace warehouse_app.Migrations
                     b.HasOne("warehouse_lib.Model.Water", "CationWater")
                         .WithMany("Cations")
                         .HasForeignKey("CationWaterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("CationWater");
                 });

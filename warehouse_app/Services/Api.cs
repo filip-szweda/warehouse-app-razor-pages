@@ -41,8 +41,8 @@ namespace warehouse_app.Services
                 .Include(w => w.Type)
                 .Include(w => w.Cations)
                 .Include(w => w.Anions)
-                .Include(water => water.DeliveryDetails)
-                .Include(water => water.SaleDetails)
+                .Include(w => w.DeliveryDetails)
+                .Include(w => w.SaleDetails)
                 .ToListAsync();
 
             return waters.Select(w => new warehouse_lib.DTO.Water
@@ -56,8 +56,8 @@ namespace warehouse_app.Services
                 AnionsIds = w.Anions.Select(a => a.Id).ToList(),
                 Mineralization = w.Mineralization,
                 PackagingTypeId = w.Packaging.Id,
-                DeliveryDetailsIds = w.DeliveryDetails.Select(d => d.Id).ToList(),
-                SaleDetailsIds = w.SaleDetails.Select(s => s.Id).ToList()
+                DeliveryDetailsNumberOfBottles = w.DeliveryDetails.Select(d => d.NumberOfPallets * d.BottlesPerPallet).ToList(),
+                SaleDetailsNumberOfBottles = w.SaleDetails.Select(s => s.NumberOfBottles).ToList()
             }).ToList();
         }
 

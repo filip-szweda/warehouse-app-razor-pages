@@ -32,21 +32,21 @@ namespace warehouse_app.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Company>().HasMany(c => c.Deliveries).WithOne(i => i.Supplier).HasForeignKey(i => i.SupplierId);
-            builder.Entity<Company>().HasMany(c => c.Waters).WithOne(i => i.Producer).HasForeignKey(i => i.ProducerId);
+            builder.Entity<Company>().HasMany(c => c.Deliveries).WithOne(i => i.Supplier).HasForeignKey(i => i.SupplierId).OnDelete(DeleteBehavior.SetNull);
+            builder.Entity<Company>().HasMany(c => c.Waters).WithOne(i => i.Producer).HasForeignKey(i => i.ProducerId).OnDelete(DeleteBehavior.Cascade);
             
-            builder.Entity<Water>().HasMany(w => w.Cations).WithOne(w => w.CationWater).HasForeignKey(w => w.CationWaterId);
-            builder.Entity<Water>().HasMany(w => w.Anions).WithOne(w => w.AnionWater).HasForeignKey(w => w.AnionWaterId);
-            builder.Entity<Water>().HasMany(w => w.DeliveryDetails).WithOne(d => d.Water).HasForeignKey(d => d.WaterId);
-            builder.Entity<Water>().HasMany(w => w.SaleDetails).WithOne(s => s.Water).HasForeignKey(s => s.WaterId);
+            builder.Entity<Water>().HasMany(w => w.Cations).WithOne(w => w.CationWater).HasForeignKey(w => w.CationWaterId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Water>().HasMany(w => w.Anions).WithOne(w => w.AnionWater).HasForeignKey(w => w.AnionWaterId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Water>().HasMany(w => w.DeliveryDetails).WithOne(d => d.Water).HasForeignKey(d => d.WaterId).OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Water>().HasMany(w => w.SaleDetails).WithOne(s => s.Water).HasForeignKey(s => s.WaterId).OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<WaterType>().HasMany(w => w.Waters).WithOne(w => w.Type).HasForeignKey(w => w.TypeId);
+            builder.Entity<WaterType>().HasMany(w => w.Waters).WithOne(w => w.Type).HasForeignKey(w => w.TypeId).OnDelete(DeleteBehavior.SetNull);
 
-            builder.Entity<PackagingType>().HasMany(p => p.Waters).WithOne(w => w.Packaging).HasForeignKey(w => w.PackagingId);
+            builder.Entity<PackagingType>().HasMany(p => p.Waters).WithOne(w => w.Packaging).HasForeignKey(w => w.PackagingId).OnDelete(DeleteBehavior.SetNull);
 
-            builder.Entity<Delivery>().HasMany(d => d.DeliveryDetails).WithOne(d => d.Delivery).HasForeignKey(d => d.DeliveryId);
+            builder.Entity<Delivery>().HasMany(d => d.DeliveryDetails).WithOne(d => d.Delivery).HasForeignKey(d => d.DeliveryId).OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Sale>().HasMany(s => s.SaleDetails).WithOne(s => s.Sale).HasForeignKey(s => s.SaleId);
+            builder.Entity<Sale>().HasMany(s => s.SaleDetails).WithOne(s => s.Sale).HasForeignKey(s => s.SaleId).OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<warehouse_lib.Model.Anion> Anion { get; set; } = default!;

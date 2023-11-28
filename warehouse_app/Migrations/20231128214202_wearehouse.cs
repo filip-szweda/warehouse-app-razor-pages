@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace warehouse_app.Migrations
 {
     /// <inheritdoc />
-    public partial class warehouse : Migration
+    public partial class wearehouse : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -219,7 +219,7 @@ namespace warehouse_app.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Employee = table.Column<string>(type: "TEXT", nullable: false),
-                    SupplierId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SupplierId = table.Column<int>(type: "INTEGER", nullable: true),
                     DeliveryDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -230,7 +230,7 @@ namespace warehouse_app.Migrations
                         column: x => x.SupplierId,
                         principalTable: "Companies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -240,10 +240,10 @@ namespace warehouse_app.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    TypeId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ProducerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TypeId = table.Column<int>(type: "INTEGER", nullable: true),
+                    ProducerId = table.Column<int>(type: "INTEGER", nullable: true),
                     pH = table.Column<decimal>(type: "TEXT", nullable: false),
-                    PackagingId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PackagingId = table.Column<int>(type: "INTEGER", nullable: true),
                     Photo = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -260,13 +260,13 @@ namespace warehouse_app.Migrations
                         column: x => x.PackagingId,
                         principalTable: "PackagingTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Waters_WaterTypes_TypeId",
                         column: x => x.TypeId,
                         principalTable: "WaterTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -277,8 +277,8 @@ namespace warehouse_app.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     NumberOfPallets = table.Column<int>(type: "INTEGER", nullable: false),
                     BottlesPerPallet = table.Column<int>(type: "INTEGER", nullable: false),
-                    WaterId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DeliveryId = table.Column<int>(type: "INTEGER", nullable: false)
+                    WaterId = table.Column<int>(type: "INTEGER", nullable: true),
+                    DeliveryId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -334,8 +334,8 @@ namespace warehouse_app.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     NumberOfBottles = table.Column<int>(type: "INTEGER", nullable: false),
-                    WaterId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SaleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    WaterId = table.Column<int>(type: "INTEGER", nullable: true),
+                    SaleId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
