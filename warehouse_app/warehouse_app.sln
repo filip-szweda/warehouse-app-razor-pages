@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouse_app", "warehouse_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouse_lib", "..\warehouse_lib\warehouse_lib.csproj", "{E0B348A2-E0F1-4B66-AFA0-BA4D960C765D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "warehouse_client", "..\warehouse_client\warehouse_client.csproj", "{212072DF-7ECD-4F38-A82E-ED25537A78B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E0B348A2-E0F1-4B66-AFA0-BA4D960C765D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0B348A2-E0F1-4B66-AFA0-BA4D960C765D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0B348A2-E0F1-4B66-AFA0-BA4D960C765D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212072DF-7ECD-4F38-A82E-ED25537A78B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212072DF-7ECD-4F38-A82E-ED25537A78B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212072DF-7ECD-4F38-A82E-ED25537A78B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212072DF-7ECD-4F38-A82E-ED25537A78B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

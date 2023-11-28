@@ -7,7 +7,7 @@ namespace warehouse_client
 {
     internal class Program
     {
-        static string baseUrl = "https://localhost:44375";
+        static string baseUrl = "https://localhost:44384";
 
         static void Main(string[] args)
         {
@@ -124,7 +124,7 @@ namespace warehouse_client
         private static void ShowWarehouseWaterStock()
         {
             var httpClient = new HttpClient();
-            var urlWater = $"{baseUrl}/waters";
+            var urlWater = $"{baseUrl}/water";
 
             var waters = httpClient.GetFromJsonAsync<warehouse_lib.DTO.Water[]>(urlWater).Result;
             for (int i = 0; i < waters.Length; i++)
