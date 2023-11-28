@@ -6,7 +6,7 @@ namespace warehouse_app.Data
     {
         public static void Initialize(ApplicationDbContext context)
         {
-            List<PackagingType> packingTypes = new List<PackagingType>()
+            List<PackagingType> packagingTypes = new List<PackagingType>()
             {
                 new PackagingType { Type = "Small Bottle", Capacity = 0.5 },
                 new PackagingType { Type = "Medium Bottle", Capacity = 1.0 },
@@ -18,7 +18,7 @@ namespace warehouse_app.Data
 
             if (!context.PackagingTypes.Any())
             {
-                context.PackagingTypes.AddRange(packingTypes);
+                context.PackagingTypes.AddRange(packagingTypes);
                 context.SaveChanges();
             }
 
@@ -55,52 +55,52 @@ namespace warehouse_app.Data
                 new Water
                 {
                     Name = "HydroFlow", Type = waterTypes[0], Producer = companies[0], pH = 7.5M,
-                    Packaging = packingTypes[0], Photo = ""
+                    Packaging = packagingTypes[0], Photo = ""
                 },
                 new Water
                 {
                     Name = "BlueWave", Type = waterTypes[0], Producer = companies[1], pH = 8.0M,
-                    Packaging = packingTypes[1], Photo = ""
+                    Packaging = packagingTypes[1], Photo = ""
                 },
                 new Water
                 {
                     Name = "CrystalClear", Type = waterTypes[0], Producer = companies[2], pH = 6.8M,
-                    Packaging = packingTypes[2], Photo = ""
+                    Packaging = packagingTypes[2], Photo = ""
                 },
                 new Water
                 {
                     Name = "SpringSource", Type = waterTypes[0], Producer = companies[3], pH = 7.2M,
-                    Packaging = packingTypes[3], Photo = ""
+                    Packaging = packagingTypes[3], Photo = ""
                 },
                 new Water
                 {
                     Name = "MountainFlow", Type = waterTypes[0], Producer = companies[4], pH = 7.8M,
-                    Packaging = packingTypes[4], Photo = ""
+                    Packaging = packagingTypes[4], Photo = ""
                 },
                 new Water
                 {
                     Name = "PureStream", Type = waterTypes[0], Producer = companies[5], pH = 6.5M,
-                    Packaging = packingTypes[5], Photo = ""
+                    Packaging = packagingTypes[5], Photo = ""
                 },
                 new Water
                 {
                     Name = "RiverBend", Type = waterTypes[0], Producer = companies[6], pH = 8.2M,
-                    Packaging = packingTypes[0], Photo = ""
+                    Packaging = packagingTypes[0], Photo = ""
                 },
                 new Water
                 {
                     Name = "HydroFlow", Type = waterTypes[1], Producer = companies[0], pH = 7.0M,
-                    Packaging = packingTypes[1], Photo = ""
+                    Packaging = packagingTypes[1], Photo = ""
                 },
                 new Water
                 {
                     Name = "BlueWave", Type = waterTypes[1], Producer = companies[1], pH = 7.4M,
-                    Packaging = packingTypes[2], Photo = ""
+                    Packaging = packagingTypes[2], Photo = ""
                 },
                 new Water
                 {
                     Name = "CrystalClear", Type = waterTypes[1], Producer = companies[2], pH = 7.1M,
-                    Packaging = packingTypes[3], Photo = ""
+                    Packaging = packagingTypes[3], Photo = ""
                 }
             };
 

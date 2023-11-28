@@ -21,7 +21,7 @@ namespace warehouse_lib.DTO
 
         public string Mineralization { get; set; } = default!;
 
-        public int PackingTypeId { get; set; } = default!;
+        public int PackagingTypeId { get; set; } = default!;
 
         public List<int> DeliveryDetailsIds { get; set; } = default!;
 

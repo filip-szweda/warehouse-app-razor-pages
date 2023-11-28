@@ -55,7 +55,7 @@ namespace warehouse_app.Services
                 CationsIds = w.Cations.Select(c => c.Id).ToList(),
                 AnionsIds = w.Anions.Select(a => a.Id).ToList(),
                 Mineralization = w.Mineralization,
-                PackingTypeId = w.Packaging.Id,
+                PackagingTypeId = w.Packaging.Id,
                 DeliveryDetailsIds = w.DeliveryDetails.Select(d => d.Id).ToList(),
                 SaleDetailsIds = w.SaleDetails.Select(s => s.Id).ToList()
             }).ToList();

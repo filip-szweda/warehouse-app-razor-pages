@@ -1,11 +1,14 @@
 ﻿using System.Net.Http.Json;
 using System;
 using System.Security.Cryptography.X509Certificates;
+using warehouse_lib.DTO;
 
 namespace warehouse_client
 {
     internal class Program
     {
+        static string baseUrl = "https://localhost:44375";
+
         static void Main(string[] args)
         {
             var quit = false;
@@ -41,105 +44,110 @@ namespace warehouse_client
 
         private static void BuyWater()
         {
-            Console.WriteLine("Enter the username of the customer: ");
+            Console.WriteLine("Enter customer: ");
             var customerUserName = Console.ReadLine();
 
-            var buyWaterDto = new BuyWaterDTO
+            var buyWater = new warehouse_lib.DTO.BuyWater
             {
-                CustomerUserName = customerUserName,
-                BuyWaterDetails = new List<BuyWaterDetailDTO>(),
+                Customer = customerUserName,
+                BuyWaterDetails = new List<warehouse_lib.DTO.BuyWaterDetails>(),
             };
 
-            Console.WriteLine("Enter the name of the water you want to buy (if you want to stop adding water to the sale, enter 0): ");
+            Console.WriteLine("Enter water name (enter 'stop' to stop adding water): ");
             var waterName = Console.ReadLine();
-            while (waterName != "0")
+            while (waterName != "stop")
             {
                 var type = "";
                 try
                 {
-                    Console.WriteLine("Enter the type of the water you want to buy sparkling or still: ");
+                    Console.WriteLine("Enter type (Sparkling / Still): ");
                     type = Console.ReadLine();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Invalid type!");
+                    Console.WriteLine("[ERROR] Invalid type.");
                     continue;
                 }
 
-                var quantity = 0;
+                var numberOfBottles = 0;
                 try
                 {
-                    Console.WriteLine("Enter the quantity of the water you want to buy: ");
-                    quantity = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter number of bottles: ");
+                    numberOfBottles = int.Parse(Console.ReadLine());
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Invalid quantity!");
+                    Console.WriteLine("[ERROR] Invalid number of bottles.");
                     continue;
                 }
 
-                var buyWaterDetailDto = new BuyWaterDetailDTO
+                var buyWaterDetails = new warehouse_lib.DTO.BuyWaterDetails
                 {
                     Name = waterName,
-                    Quantity = quantity,
+                    NumberOfBottles = numberOfBottles,
                     Type = type,
                 };
 
-                buyWaterDto.BuyWaterDetails.Add(buyWaterDetailDto);
-                Console.WriteLine("Enter the name of the water you want to buy (if you want to stop adding water to the sale, enter 0): ");
+                buyWater.BuyWaterDetails.Add(buyWaterDetails);
+                Console.WriteLine("Enter water name (enter 'stop' to stop adding water): ");
                 waterName = Console.ReadLine();
             }
 
             var httpClient = new HttpClient();
-            var url = "https://localhost:44375/buy-water";
-            var response = httpClient.PostAsJsonAsync(url, buyWaterDto).Result;
+            var url = $"{baseUrl}/buy-water";
+
+            var response = httpClient.PostAsJsonAsync(url, buyWater).Result;
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("Sale saved successfully.");
+                Console.WriteLine("Success.");
+                return;
             }
-            else
-            {
-                Console.WriteLine("Sale not saved.");
-            }
+
+            Console.WriteLine("Failure.");
         }
 
         private static void ShowRegisteredUsers()
         {
             var httpClient = new HttpClient();
-            var url = "https://localhost:44375/users";
-            var users = httpClient.GetFromJsonAsync<string[]>(url).Result;
+            var url = $"{baseUrl}/registered-users";
+
+            var users = httpClient.GetFromJsonAsync<warehouse_lib.DTO.User[]>(url).Result;
             foreach (var user in users)
             {
-                Console.WriteLine($"{user}");
+                Console.WriteLine("====================================================");
+                Console.WriteLine($"Id: {user.Id}");
+                Console.WriteLine($"UserName: {user.UserName}");
+                Console.WriteLine($"Email: {user.Email}");
             }
         }
 
         private static void ShowWarehouseWaterStock()
         {
             var httpClient = new HttpClient();
-            var urlWater = "https://localhost:44375/waters";
-            var waters = httpClient.GetFromJsonAsync<WaterDTO[]>(urlWater).Result;
+            var urlWater = $"{baseUrl}/waters";
+
+            var waters = httpClient.GetFromJsonAsync<warehouse_lib.DTO.Water[]>(urlWater).Result;
             for (int i = 0; i < waters.Length; i++)
             {
-                Console.WriteLine($"==================== {waters[i].Name} ====================");
-                Console.WriteLine($"Producer: {waters[i].Producer.Name}");
-                Console.WriteLine($"Type: {waters[i].Type.Type}");
+                Console.WriteLine("====================================================");
+                Console.WriteLine($"Id: {waters[i].Id}");
+                Console.WriteLine($"Name: {waters[i].Name}");
+                Console.WriteLine($"TypeId: {waters[i].TypeId}");
+                Console.WriteLine($"ProducerId: {waters[i].ProducerId}");
                 Console.WriteLine($"pH: {waters[i].pH}");
-                Console.WriteLine($"Mineralization: {waters[i].Mineralization}");
-                Console.WriteLine($"Packing: {waters[i].PackingType.Type}");
-                Console.WriteLine($"Cations: ");
-                foreach (var cation in waters[i].Cations)
+                Console.WriteLine($"Cations Ids: ");
+                foreach (var cationId in waters[i].CationsIds)
                 {
-                    Console.WriteLine($"{cation.Name} - {cation.Content}");
+                    Console.WriteLine($"\t{cationId}");
                 }
-                Console.WriteLine($"Anions: ");
-                foreach (var anion in waters[i].Anions)
+                Console.WriteLine($"Anions Ids: ");
+                foreach (var anionId in waters[i].AnionsIds)
                 {
-                    Console.WriteLine($"{anion.Name} - {anion.Content}");
+                    Console.WriteLine($"\t{anionId}");
                 }
 
-                var numberOfBottles = 0;
-                foreach (var delivery in waters[i].DeliveryDetails)
+                /*var numberOfBottles = 0;
+                foreach (var delivery in waters[i].DeliveryDetailsIds)
                 {
                     numberOfBottles += delivery.NumberOfBottlesPerPallet * delivery.NumberOfPallets;
                 }
@@ -152,7 +160,7 @@ namespace warehouse_client
                 }
                 Console.WriteLine($"Number of sold bottles: {numberOfSoldBottles}");
                 Console.WriteLine($"Number of bottles in stock: {numberOfBottles - numberOfSoldBottles}");
-                Console.WriteLine("====================================================");
+                Console.WriteLine("====================================================");*/
             }
         }
     }
