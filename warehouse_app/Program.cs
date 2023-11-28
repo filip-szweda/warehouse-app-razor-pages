@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using warehouse_app.Data;
 using warehouse_app.Services;
+using warehouse_lib.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,15 +62,17 @@ using (var scope = app.Services.CreateScope())
     DatabaseInitalizer.Initialize(context);
 }
 
-app.MapGet("/registered-users", async (Api api) => await api.GetAllUsersAsync());
+app.MapGet("/registered-users", async (Api api) => await api.GetRegisteredUsersAsync());
 
-app.MapGet("/water-types", async (Api api) => await api.GetAllWatersAsync());
+app.MapGet("/water-types", async (Api api) => await api.GetWaterTypesAsync());
 
-/*app.MapPost("/buy-water", async (Api api, BuyWaterDTO buyWaterDTO) =>
+app.MapGet("/water", async (Api api) => await api.GetWatersAsync());
+
+app.MapPost("/buy-water", async (Api api, warehouse_lib.DTO.BuyWater buyWater) =>
 {
-    await api.BuyWaterAsync(buyWaterDTO);
+    await api.BuyWaterAsync(buyWater);
     return Results.Ok();
-});*/
+});
 
 
 app.UseHttpsRedirection();
